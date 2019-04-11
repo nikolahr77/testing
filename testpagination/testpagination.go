@@ -1,7 +1,5 @@
 package testpagination
 
-import "fmt"
-
 // Pages contains a slice of strings that will hold the information
 type Pages struct {
 	Elements []string
@@ -23,8 +21,11 @@ func (p *Pages) LastPage() []string {
 	if len(p.Elements)%p.PageSize != 0 {
 		p.current++
 	}
+	if len(p.Elements)%p.PageSize==0 {
+		s := p.Elements[len(p.Elements)-p.PageSize:]
+		return s
+	}
 	s := p.Elements[len(p.Elements)-len(p.Elements)%p.PageSize:]
-	fmt.Println(s)
 	return s
 }
 
